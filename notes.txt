@@ -1,0 +1,3 @@
+manifest.json file is needed and compulsory for ANY extension. This JSON file describes the extension's capabilities and configuration.
+    it should have a "name", "version", "description", "permissions" field
+     

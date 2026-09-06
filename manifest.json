@@ -1,10 +1,34 @@
 {
-  "name": "Hello Extensions of the world!",
-  "description": "Base Level Extension",
-  "version": "1.0",
   "manifest_version": 3,
-  "action": {
-    "default_popup": "hello.html",
-    "default_icon": "hello_extensions.png"
-  }
+
+  "name": "leetcode-github-extension",
+
+  "version": "1.0",
+
+  "description": "An extension that automatically makes github commits for every leetcode problem that I solve",
+
+  "action":{
+
+    "default_icon": "default_icon.png",
+
+    "default_popup": "popup/popup.html"
+
+  },
+
+  "background":{
+    "service-worker": "background_script.js"
+  },
+
+  "content_scripts":[
+    {
+    
+      "js": ["scripts/get_solved_question.js"],
+
+        "matches": [
+            "https://leetcode.com/problems/*"
+        ]
+
+    }
+
+  ]
 }

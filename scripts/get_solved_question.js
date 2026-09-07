@@ -1,5 +1,4 @@
 let submit_btn = document.querySelector("button[data-e2e-locator='console-submit-button']")
-console.log(submit_btn)
 
 /*
 If Rejected
@@ -10,43 +9,45 @@ If Accepted
 
 */
 
-function check_if_solution_is_accepted_or_rejeted(timeout = 1200000) {
+function check_if_solution_is_accepted_or_rejeted(timeout = 10000) {
     return new Promise((resolve, reject) => {
         const startTime = Date.now();
+        console.log("PROMISE DEFINED!!!")
 
         const checkResult = () => {
-            const negative = document.querySelectorAll('h3');
-            const positive = document.querySelector('span[data-e2e-locator="submission-result"]');
 
-            
-            for (let element of negative){
-                
-                if (element.textContent == "Rejected"){
-                    negative = true
-                }
+            const accepted = document.querySelector('span[data-e2e-locator="submission-result"]');
+            // const runtime_error =document.querySelector('span[data-e2e-locator="console-result"]'); //I'll handle other error messages later
 
-            }
+            const allH3 = document.querySelectorAll('h3');
+            const wrong_answer = allH3[0]
 
-            if (positive) {
+            if (accepted) {
                 observer.disconnect();
+                console.log("OBSERVER HAS BEEN DISCONNECTED. CORRECT ANSWERRRR")
+
                 resolve({
-                    type: "positive",
-                    element: positive
+                    type: "Accepted",
+                    element: accepted
                 });
                 return;
             }
 
-            if (negative) {
+            if (wrong_answer) {
                 observer.disconnect();
+                console.log("OBSERVER HAS BEEN DISCONNECTED. WRONG ANSWERRRR")
+
                 resolve({
-                    type: "negative",
-                    element: negative
+                    type: "wrong_answer",
+                    element: wrong_answer
                 });
                 return;
             }
 
             if (Date.now() - startTime >= timeout) {
                 observer.disconnect();
+                console.log("OBSERVER HAS BEEN DISCONNECTED. TIME EXCEEDED")
+
                 reject(new Error("Timed out waiting for result"));
             }
         };
@@ -64,14 +65,36 @@ function check_if_solution_is_accepted_or_rejeted(timeout = 1200000) {
 }
 
 
+if (submit_btn){
+    console.log(submit_btn)
 
 
-submit_btn.addEventListener("click", (event) => {
 
 
-    // Check if the solution is accepted or rejected
-    check_if_solution_is_accepted_or_rejeted()
+    submit_btn.addEventListener("click", (event) => {
+        console.log("SUBMIT BUTTON CLICKED")
 
-})
+
+        // Check if the solution is accepted or rejected
+        check_if_solution_is_accepted_or_rejeted()
+        .then((obj) => {
+            
+            console.log(obj)
+
+
+
+        }) //Get correct solution and pass it to the backend
+        .catch((error) => {
+
+
+            console.log(error)
+
+        }) //Do nothing after. Wait for the submit button to be clicked on again
+
+    })
+
+
+
+}
 
 

@@ -1,4 +1,12 @@
 First monitor the page for when the user clicks the submit button with an event listener
 After the user clicks the submit button, wait for the logic to finish and know if the solution is accepted or rejected.
+    If Rejected
+        "Wrong Answer" will be the text content of an h3 element
+
+    If Accepted
+        It is in a span element with "data-e2e-locator="submission-result" with "Accepted" as text content
+    
+
+
 If the solution is rejected, do nothing.
 If the solution is accepted, we send a message to the background worker to process the post requests, api stuff, get the user solution and push to github.

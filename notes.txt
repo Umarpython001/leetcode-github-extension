@@ -1,3 +1,5 @@
 manifest.json file is needed and compulsory for ANY extension. This JSON file describes the extension's capabilities and configuration.
-    it should have a "name", "version", "description", "permissions" field
-     
+    The only required keys are "name", "version", and "manifest_version".
+    It must be located at the root of the project.
+    It supports comments (//) during development, but these must be removed before uploading your code to the Chrome Web Store.
+

@@ -10,3 +10,11 @@ After the user clicks the submit button, wait for the logic to finish and know i
 
 If the solution is rejected, do nothing.
 If the solution is accepted, we send a message to the background worker to process the post requests, api stuff, get the user solution and push to github.
+
+Get...
+    Problem number and question
+    Language of solution
+    Solution code
+
+What exactly am I pushing to GitHub...
+    Make a md file 

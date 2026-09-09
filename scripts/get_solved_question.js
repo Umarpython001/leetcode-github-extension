@@ -96,18 +96,45 @@ if (submit_btn) {
         // 3. Check if the solution is accepted and then handle result
         check_if_solution_is_accepted_or_rejeted()
             .then((obj) => {
+
+
                 if (obj.type === "Accepted") {
-                    console.log("Solution Accepted! Ready to send to backend:", {
-                        problem: problem_info,
-                        code: code_str
-                    });
-                    // TODO: Add your backend fetch call here
-                } else {
+
+                    let data_to_send = {
+
+                        problem_info: problem_info,
+                        code: code_str          
+
+
+                    }
+
+                    console.log("Solution Accepted! Ready to send to backend:", data_to_send);
+
+
+                    // Send answer to background service worker. 
+                    async function sendDataToBackground(solutionData) {
+                    try {
+                        const response = await chrome.runtime.sendMessage({
+                        action: "PUSH_TO_GITHUB",
+                        solution_data: solutionData
+                        });
+
+                        console.log("Response from service worker:", response);
+                    } catch (error) {
+                        console.error("Error sending message:", error);
+                    }
+                    }
+
+                    sendDataToBackground(data_to_send)
+
+
+                } 
+                else{
                     console.log("Solution was not accepted:", obj.type);
                 }
             })
             .catch((error) => {
-                console.error("Error checking submission result:", error);
+                console.error("Error checking submission result:", error.message);
             });
     });
 }

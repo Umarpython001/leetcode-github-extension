@@ -100,23 +100,27 @@ if (submit_btn) {
 
                 if (obj.type === "Accepted") {
 
-                    let data_to_send = {
+                    const MDstring = `  # ${problem_info}
 
-                        problem_info: problem_info,
-                        code: code_str          
+                                        ## Solution
+
+                                        \`\`\`
+                                            ${code_str.trim()}
+                                        \`\`\`;
 
 
-                    }
+                    `
 
-                    console.log("Solution Accepted! Ready to send to backend:", data_to_send);
+                    console.log("Solution Accepted! Ready to send to backend:", MDstring);
 
 
                     // Send answer to background service worker. 
-                    async function sendDataToBackground(solutionData) {
+                    async function sendDataToBackground(solutionStr) {
                     try {
                         const response = await chrome.runtime.sendMessage({
                         action: "PUSH_TO_GITHUB",
-                        solution_data: solutionData
+                        solution_str: solutionStr,
+                        file_name: problem_info
                         });
 
                         console.log("Response from service worker:", response);
@@ -125,7 +129,7 @@ if (submit_btn) {
                     }
                     }
 
-                    sendDataToBackground(data_to_send)
+                    sendDataToBackground(MDstring)
 
 
                 } 

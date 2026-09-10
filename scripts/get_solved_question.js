@@ -1,3 +1,11 @@
+chrome.runtime.onMessage.addListener((message) => {
+    if (message.action === "PUSH_TO_GITHUB_ACK") {
+        console.log("Background listener received the PUSH_TO_GITHUB message.");
+    }
+});
+
+
+
 let submit_btn = document.querySelector("button[data-e2e-locator='console-submit-button']");
 
 /*
@@ -100,13 +108,13 @@ if (submit_btn) {
 
                 if (obj.type === "Accepted") {
 
-                    const MDstring = `  # ${problem_info}
+                    const MDstring = `  # ${problem_info} 
+        
+    ## Solution
 
-                                        ## Solution
-
-                                        \`\`\`
-                                            ${code_str.trim()}
-                                        \`\`\`;
+    \`\`\`
+    ${code_str.trimEnd()}
+    \`\`\`;
 
 
                     `
@@ -115,7 +123,7 @@ if (submit_btn) {
 
 
                     // Send answer to background service worker. 
-                    async function sendDataToBackground(solutionStr) {
+                    async function sendDataToBackground(solutionStr, problem_info) {
                     try {
                         const response = await chrome.runtime.sendMessage({
                         action: "PUSH_TO_GITHUB",
@@ -129,7 +137,7 @@ if (submit_btn) {
                     }
                     }
 
-                    sendDataToBackground(MDstring)
+                    sendDataToBackground(MDstring, problem_info);
 
 
                 } 

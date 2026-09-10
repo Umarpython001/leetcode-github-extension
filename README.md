@@ -2,21 +2,21 @@
 
 Automatically archive your LeetCode triumphs! This Chrome extension detects when you solve a problem and have it **Accepted**, then instantly pushes your solution to a GitHub repository as a beautifully formatted Markdown file. 
 
-Stop manual copying and pasting—keep your GitHub activity streak alive and your solutions organized effortlessly.
+Stop manual copying and pasting. Keep your GitHub activity streak alive and your solutions organized effortlessly.
 
 ---
 
-## ✨ Features
+## Features
 
-- **🚀 Zero-Effort Archiving**: Automatically triggers the push only when your submission is "Accepted".
-- **🔐 Secure Token Management**: Configure your GitHub Personal Access Token directly through the extension popup—no need to mess with `.env` files or scripts.
-- **📝 Smart Formatting**: Your solutions are pushed as `.md` files, including the problem name and code blocks for better readability on GitHub.
-- **🌍 UTF-8 Support**: Handles special characters and symbols in your code perfectly using Base64 encoding.
-- **⚡ Background Processing**: Powered by a Manifest V3 Service Worker, ensuring your LeetCode experience remains fast and uninterrupted.
+- **Zero-Effort Archiving**: Automatically triggers the push only when your submission is "Accepted".
+- **Secure Token Management**: Configure your GitHub Personal Access Token directly through the extension popup—no need to mess with `.env` files or scripts.
+- **Smart Formatting**: Your solutions are pushed as `.md` files, including the problem name and code blocks for better readability on GitHub.
+- **UTF-8 Support**: Handles special characters and symbols in your code perfectly using Base64 encoding.
+- **Background Processing**: Powered by a Manifest V3 Service Worker, ensuring your LeetCode experience remains fast and uninterrupted.
 
 ---
 
-## 🛠️ Installation & Setup
+## Installation & Setup
 
 Since this is a custom extension, you'll need to load it in Developer Mode.
 
@@ -40,7 +40,7 @@ Since this is a custom extension, you'll need to load it in Developer Mode.
 
 ---
 
-## ⚙️ How It Works
+## How It Works
 
 The extension operates through a three-part architecture:
 
@@ -61,7 +61,7 @@ The extension operates through a three-part architecture:
 
 ---
 
-## 📂 Repository Structure
+## Repository Structure
 
 ```text
 leetcode-github-extension/
@@ -78,7 +78,7 @@ leetcode-github-extension/
 
 ---
 
-## ⚠️ Important Notes
+## Important Notes
 
 - **DOM Dependencies**: This extension relies on LeetCode's current HTML structure. If LeetCode updates their website layout, the content script may need updates to locate the submit button or result status.
 - **Security**: Your token is stored in `chrome.storage.local`, which is private to your browser profile. Never share your token with anyone.

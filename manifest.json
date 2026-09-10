@@ -7,6 +7,10 @@
 
   "description": "An extension that automatically makes github commits for every leetcode problem that I solve",
 
+  "host_permissions": ["https://api.github.com/*"],
+
+  "permissions": ["storage"],
+
   "action":{
 
     "default_icon": "default_icon.png",
